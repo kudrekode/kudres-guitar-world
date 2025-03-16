@@ -88,6 +88,17 @@ const Tuner: React.FC<TunerProps> = ({ onClose }) => {
         setInTune(true);
     };
 
+    // Handle closing the tuner
+    const handleClose = () => {
+        // Stop the tuner if it's playing
+        if (isActive) {
+            stopTuner();
+        }
+        
+        // Call the onClose prop
+        onClose();
+    };
+
     // Clean up on component unmount
     useEffect(() => {
         return () => {
@@ -97,9 +108,12 @@ const Tuner: React.FC<TunerProps> = ({ onClose }) => {
 
     return (
         <div className="tuner-container">
-            <button onClick={onClose}>Close Tuner</button>
-
-            <h1>Guitar Tuner</h1>
+            <div className="tuner-header">
+                <h1>Guitar Tuner</h1>
+                <button className="close-button" onClick={handleClose}>
+                    ×
+                </button>
+            </div>
             
             {error && <div className="error-message">{error}</div>}
             
@@ -139,7 +153,6 @@ const Tuner: React.FC<TunerProps> = ({ onClose }) => {
                 onNoteSelect={handleNoteSelect}
                 tuningName={currentTuning}
             />
-
         </div>
     );
 };

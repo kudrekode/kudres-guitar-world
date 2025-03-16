@@ -6,12 +6,38 @@
     background-color: #f5f5f5;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.tuner-container h1 {
+.tuner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tuner-header h1 {
+    margin: 0;
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.close-button:hover {
+    background-color: #e0e0e0;
+    color: #333;
 }
 
 .error-message {
