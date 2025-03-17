@@ -6,8 +6,9 @@ I started by outlining the initial objectives I wanted to achieve:
 1. Welcome page with some instructions and enter button
 2. Guitar tuner
 3. Metronome to practice to 
-4. Midi drum creator to practice to with spectrum analyser for cool design purposes
-5. Guitar chords and tablature theory
+4. Guitar chord calculator
+5. Midi drum creator to practice to with spectrum analyser for cool design purposes
+6. Guitar chords and tablature theory
 
 ## Methodology:
 
@@ -24,5 +25,25 @@ Once we had the pitch detection algorithm we could manually map out different gu
 ### 2) Metronome:
 I decided to use the package "use-sound" since, it seemed perfect for basic playing audio files using react hooks. If I wanted to expand to more complex features I could use this in conjunction with the Web Audio API however, initially this didn't seem needed.
 My plan was to import two audio files, click 1 and click 2 and play the corresponding click depending on the BPM and time signature selected.
+
+Implementing a custom BPM is simple as we can divide 60,000 by a user input BPM number to get the corresponding millisecond value and use this as an interval between playing each metronome clikc. The more tricky part is to implement custom time signatures. 
+
+The most common time signature is 4/4 meaning there are 4 beats in a bar. This is important as a metronome has 2 click sounds, one marking the beat and one marking the bar. So with 4/4 we would have one bar click and three beat clicks (making 4 in total). However, alternative time signatures include things such as 6/8 in which rather than just 6 beats within 8 bars, it means there are triplet tpye patterns within the bar. T
+Thus, we can calculate rhythms with 8ths like this:
+
+if (ts.value === 8) {
+return (60000 / bpm) * (3 / (ts.beats / 2));
+}
+
+Once we had all the rules of how to calculate intervals between beats and when to play a bar click sound, the missing pieces were a user controlled UI and an appealing animation to represent the data.
+UseRef is a great React hook for time based intervals since we can store values that don't change during a re-render of the virtual DOM. In other words, we can store use defined intervals within useRefs and then update UI using animationframeRef to dynamically change UI but keep metronome loops playing.
+
+### 3) Guitar Chord Calculator:
+The next section I wanted to create was a guitar chord calculator inspired by Oolimo: https://www.oolimo.com/en/guitar-chords/analyze I have used this website countless times to work out waht guitar chord is being played. It comprises of a fretbaord UI in which you select what notes you are playing and it tells you what that chord is or likely is.
+
+
+
+
+
 
 
