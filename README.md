@@ -43,7 +43,9 @@ The next section I wanted to create was a guitar chord calculator inspired by Oo
 
 I decided to use Moonwave99/Fretboard.js since it had a method to interact with a fretboard (selecting notes) as well as inbuilt functions for rendering sounds, and showing theory which could be useful later to other parts of the project (to limit needing lots of different packages).
 
+I followed fairly closesly the documentation which had a very simple method to create and a call a fretboard object ( = new Fretboard) and then there are built in methods for mouse events in which you can click frets, save the position of that fret and keep in the render. Since we had everything inside a functional component, the key was to have the render within useRefs so that we could keep the state of the renders even when other elements were re-rendering.
 
+The only really custom part I added was the ability to change the tunings of the guitar (this was straightforward since Fretboard.js took different tunings as a parameter for first note of each string). And also when creating a custom script (ChordDisplay.tsx) which used tonaljs/tonal for calculating the likely chord that was generated (the logic was done for me through this package so saved the need to hard code and store each chord rule to calculate outputs).
 
 
 
