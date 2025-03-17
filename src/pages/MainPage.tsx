@@ -1,6 +1,7 @@
 import Tuner from "../components/tuner/PitchyTuner.tsx";
 import {useState} from "react";
 import Metronome from "../components/metronome/Metronome.tsx";
+import ChordAnalyser from "../components/chord-analyser/Chord-Analyser.tsx";
 import "./MainPage.css";
 
 const MainPage:React.FC = () => {
@@ -9,17 +10,34 @@ const MainPage:React.FC = () => {
     const [isTunerOpen, setIsTunerOpen] = useState(false);
     // useState to open and close the metronome
     const [isMetronomeOpen, setIsMetronomeOpen] = useState(false);
+    // useState to open and close the chord analyzer
+    const [isChordAnalyserOpen, setIsChordAnalyserOpen] = useState(false);
 
     const toggleTuner = () => {
         setIsTunerOpen(!isTunerOpen);
-        // Close metronome if tuner is being opened
-        if (!isTunerOpen) setIsMetronomeOpen(false);
+        // Close other components if tuner is being opened
+        if (!isTunerOpen) {
+            setIsMetronomeOpen(false);
+            setIsChordAnalyserOpen(false);
+        }
     }
 
     const toggleMetronome = () => {
         setIsMetronomeOpen(!isMetronomeOpen);
-        // Close tuner if metronome is being opened
-        if (!isMetronomeOpen) setIsTunerOpen(false);
+        // Close other components if metronome is being opened
+        if (!isMetronomeOpen) {
+            setIsTunerOpen(false);
+            setIsChordAnalyserOpen(false);
+        }
+    }
+
+    const toggleChordAnalyser = () => {
+        setIsChordAnalyserOpen(!isChordAnalyserOpen);
+        // Close other components if chord analyser is being opened
+        if (!isChordAnalyserOpen) {
+            setIsTunerOpen(false);
+            setIsMetronomeOpen(false);
+        }
     }
 
     return (
@@ -36,10 +54,12 @@ const MainPage:React.FC = () => {
             <div className="tool-buttons">
                 {!isMetronomeOpen && <button onClick={toggleMetronome}>Open Metronome</button>}
                 {!isTunerOpen && <button onClick={toggleTuner}>Open Tuner</button>}
+                {!isChordAnalyserOpen && <button onClick={toggleChordAnalyser}>Open Chord Analyser</button>}
             </div>
 
             {isMetronomeOpen && <Metronome onClose={toggleMetronome} />}
             {isTunerOpen && <Tuner onClose={toggleTuner}/>}
+            {isChordAnalyserOpen && <ChordAnalyser onClose={toggleChordAnalyser} />}
         </div>
     )
 }

@@ -1,0 +1,120 @@
+.chord-analyser {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chord-analyser-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.chord-analyser-header h2 {
+    margin: 0;
+    text-align: center;
+    color: #333;
+    flex-grow: 1;
+}
+
+.chord-analyser .close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.chord-analyser .close-button:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.tuning-selector {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.tuning-selector label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.tuning-select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.tuning-select:hover {
+    border-color: #1976D2;
+}
+
+.tuning-select:focus {
+    outline: none;
+    border-color: #1565C0;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.clear-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+    background-color: #d32f2f;
+}
+
+.chord-display {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.chord-display h2 {
+    color: #2196F3;
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.chord-display h3 {
+    color: #666;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+/* Fretboard container styles */
+.fretboard-container {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 

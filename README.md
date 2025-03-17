@@ -39,8 +39,9 @@ Once we had all the rules of how to calculate intervals between beats and when t
 UseRef is a great React hook for time based intervals since we can store values that don't change during a re-render of the virtual DOM. In other words, we can store use defined intervals within useRefs and then update UI using animationframeRef to dynamically change UI but keep metronome loops playing.
 
 ### 3) Guitar Chord Calculator:
-The next section I wanted to create was a guitar chord calculator inspired by Oolimo: https://www.oolimo.com/en/guitar-chords/analyze I have used this website countless times to work out waht guitar chord is being played. It comprises of a fretbaord UI in which you select what notes you are playing and it tells you what that chord is or likely is.
+The next section I wanted to create was a guitar chord calculator inspired by Oolimo: https://www.oolimo.com/en/guitar-chords/analyze I have used this website countless times to work out waht guitar chord is being played. It consists of a fretboard UI in which you select what notes you are playing and it tells you what that chord is or likely is.
 
+I decided to use Moonwave99/Fretboard.js since it had a method to interact with a fretboard (selecting notes) as well as inbuilt functions for rendering sounds, and showing theory which could be useful later to other parts of the project (to limit needing lots of different packages).
 
 
 
