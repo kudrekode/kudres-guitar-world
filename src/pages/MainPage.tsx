@@ -15,6 +15,8 @@ const MainPage:React.FC = () => {
     const [isMetronomeOpen, setIsMetronomeOpen] = useState(false);
     // useState to open and close the chord analyzer
     const [isChordAnalyserOpen, setIsChordAnalyserOpen] = useState(false);
+    // useState to open and close the sequencer
+    const [isSequencerOpen, setIsSequencerOpen] = useState(false);
 
     const toggleTuner = () => {
         setIsTunerOpen(!isTunerOpen);
@@ -22,6 +24,7 @@ const MainPage:React.FC = () => {
         if (!isTunerOpen) {
             setIsMetronomeOpen(false);
             setIsChordAnalyserOpen(false);
+            setIsSequencerOpen(false);
         }
     }
 
@@ -31,6 +34,7 @@ const MainPage:React.FC = () => {
         if (!isMetronomeOpen) {
             setIsTunerOpen(false);
             setIsChordAnalyserOpen(false);
+            setIsSequencerOpen(false);
         }
     }
 
@@ -40,6 +44,17 @@ const MainPage:React.FC = () => {
         if (!isChordAnalyserOpen) {
             setIsTunerOpen(false);
             setIsMetronomeOpen(false);
+            setIsSequencerOpen(false);
+        }
+    }
+
+    const toggleSequencer = () => {
+        setIsSequencerOpen(!isSequencerOpen);
+        // Close other components if tuner is being opened
+        if (!isSequencerOpen) {
+            setIsTunerOpen(false);
+            setIsMetronomeOpen(false);
+            setIsChordAnalyserOpen(false);
         }
     }
 
@@ -54,17 +69,18 @@ const MainPage:React.FC = () => {
                 <p>Enjoy!</p>
             </div>
 
-            <MidiSequencer />
-
             <div className="tool-buttons">
                 {!isMetronomeOpen && <button onClick={toggleMetronome}>Open Metronome</button>}
                 {!isTunerOpen && <button onClick={toggleTuner}>Open Tuner</button>}
                 {!isChordAnalyserOpen && <button onClick={toggleChordAnalyser}>Open Chord Analyser</button>}
+                {!isSequencerOpen && <button onClick={toggleSequencer}>Open Beat Sequencer</button>}
             </div>
 
             {isMetronomeOpen && <Metronome onClose={toggleMetronome} />}
             {isTunerOpen && <Tuner onClose={toggleTuner}/>}
             {isChordAnalyserOpen && <ChordAnalyser onClose={toggleChordAnalyser} />}
+            {isSequencerOpen && <MidiSequencer onClose={toggleSequencer} />}
+
         </div>
     )
 }

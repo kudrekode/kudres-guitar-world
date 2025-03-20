@@ -1,4 +1,4 @@
-.metronome {
+.MidiSequencer {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
@@ -7,17 +7,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
   position: relative;
-  color:black;
+  color: black;
 }
 
-.metronome-header {
+.sequencer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.metronome-header h1 {
+.sequencer-header h1 {
   margin: 0;
   text-align: center;
   color: #333;
@@ -41,7 +41,7 @@
   color: #333;
 }
 
-.metronome-controls {
+.sequence-controls {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -180,21 +180,6 @@
   color: white;
 }
 
-.custom-time-signature {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-}
-
-.custom-inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-
 .beats-input {
   width: 60px;
   padding: 8px;
@@ -233,70 +218,6 @@
   background-color: #388E3C;
 }
 
-/* Beat Display Styles */
-.beat-display {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.beat-indicator {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-
-.beat {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #ddd;
-  transition: all 0.1s;
-}
-
-.beat.active {
-  background-color: #F44336;
-  transform: scale(1.2);
-}
-
-.beat-count {
-  font-size: 1.2rem;
-  color: #555;
-}
-
-/* Start/Stop Button Styles */
-.metronome-button {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 20px;
-}
-
-.metronome-button.start {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.metronome-button.stop {
-  background-color: #F44336;
-  color: white;
-}
-
-.metronome-button:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-}
-
-.metronome-button:active {
-  transform: scale(0.98);
-}
 
 /* Responsive Styles */
 @media (min-width: 768px) {

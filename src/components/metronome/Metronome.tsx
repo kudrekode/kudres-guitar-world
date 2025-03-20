@@ -170,7 +170,7 @@ const Metronome:React.FC<MetronomeProps> = ({ onClose }) => {
             
             <div className="metronome-controls">
                 <div className="control-section">
-                    <p>BPM:</p>
+                    <h3>BPM</h3>
                     <BPMControl bpm={bpm} setBpm={handleBpmChange} />
                 </div>
                 

@@ -1,25 +1,25 @@
-
-//Store the loop length and have intervals/beats for the assigned BPM/time signature
-//Play audio and loop with a start and stop button
-//Allow user to input BPM, time sig and key, and remove or add instruments.
-
 import {useState, useEffect, useRef} from 'react';
 import * as Tone from "tone";
-import { Midi } from "@tonejs/midi";
 
 import BPMControlSequencer from "./BPMControlSequencer.tsx";
-import TimeSignatureControlSequencer from "./TimeSignatureControlSequencer.tsx"; //not neeeded?
-import TimeSignatureControl, {commonTimeSignatures, TimeSignature} from "../metronome/TimeSignatureControl.tsx";
+// import TimeSignatureControlSequencer from "./TimeSignatureControlSequencer.tsx"; //not neeeded?
+// import TimeSignatureControl, {commonTimeSignatures, TimeSignature} from "../metronome/TimeSignatureControl.tsx";
+import TimeSignatureControlSequencer, {commonTimeSignatures, TimeSignature} from "./TimeSignatureControlSequencer.tsx";
 
-// import scribble from "scribbletune";
+import './MidiSequencer.css';
 
-const MidiSequencer:React.FC = () => {
+interface MidiSequencerProps {
+    onClose?: () => void;
+}
+
+const MidiSequencer:React.FC<MidiSequencerProps> = ({onClose}) => {
 
     //Some hooks to track state of whether sequencer loop has begun and whether we have started Tone.js loop:
     const [playLoop, setPlayLoop] = useState<boolean>(false);
     const [isToneStarted, setIsToneStarted] = useState<boolean>(false);
 
-    const [scribble, setScribble] = useState<any>(null);
+    //Unused currently
+    // const [scribble, setScribble] = useState<any>(null);
 
     //Import and track time signature intialisation and changes:
     const [timeSignature, setTimeSignature] = useState<TimeSignature>(commonTimeSignatures[0]); // Default to 4/4
@@ -30,7 +30,6 @@ const MidiSequencer:React.FC = () => {
 
     //We initialise this variable to ensure that if we select new time signature it doesnt play at same time:
     const currentSequence = useRef<Tone.Sequence | null>(null);
-
 
     //Some samples of mine using Tone.Player to point to correct destination (needed to load samples into Tone.js objects):
     const drumKit = {
@@ -209,17 +208,29 @@ const MidiSequencer:React.FC = () => {
         }
     }
 
+    // Handle closing the sequencer
+    const handleClose = () => {
+        // Call the onClose prop if provided
+        if (onClose) {
+            onClose();
+        }
+    };
 
     return(
         <div className="MidiSequencer">
-            <h1>Midi Sequencer</h1>
-            <h3>Use this to create loops to practice playing to. You can change keys, rhythms and backing
-                instruments</h3>
 
+            <div className="sequencer-header">
+                <h1>Beat Sequencer</h1>
+                {onClose && (
+                    <button className="close-button" onClick={handleClose}>
+                        ×
+                    </button>
+                )}
+            </div>
 
             <div className="sequence-controls">
                 <div className="control-section">
-                    <p>BPM:</p>
+                    <h3>BPM</h3>
                     <BPMControlSequencer bpm={bpm} setBpm={setBpm}/>
                 </div>
                 <div className="control-section">
@@ -229,7 +240,6 @@ const MidiSequencer:React.FC = () => {
                     />
                 </div>
             </div>
-
 
             <button onClick={() => setPlayLoop(prev => !prev)}>
                 {playLoop ? "Stop" : "Play"}

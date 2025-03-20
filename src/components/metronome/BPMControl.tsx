@@ -34,7 +34,6 @@ const BPMControl: React.FC<{ bpm: number; setBpm: (bpm: number) => void }> = ({ 
 
     return (
         <div className="bpm-control">
-            <label>BPM:</label>
             <div className="bpm-display">
                 {isEditing ? (
                     <input
