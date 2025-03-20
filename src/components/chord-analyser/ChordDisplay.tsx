@@ -1,4 +1,3 @@
-import React from 'react';
 import { Chord } from '@tonaljs/tonal';
 
 interface ChordDisplayProps {
@@ -8,14 +7,19 @@ interface ChordDisplayProps {
 const ChordDisplay: React.FC<ChordDisplayProps> = ({ selectedNotes }) => {
     const detectChord = (notes: string[]) => {
         if (notes.length === 0) return null;
-        
+
         // Get all possible chord names from the selected notes:
-        const detected = Chord.detect(notes);
-        
+        let detected = Chord.detect(notes);
+
         if (detected.length === 0) return "No recognized chord";
-        
-        // Return the first (most likely) chord name:
+
+        //If the output is a major chord it will write DM (D major) and for minor, Dm. So to make it more readable we change the capitalised M to be removed:
+        detected = detected.map(note => note.replace('M', ''));
+
+        // Return the first (most likely) chord name? Come back to!:
         return detected[0];
+
+
     };
 
     const chordName = detectChord(selectedNotes);
@@ -28,4 +32,4 @@ const ChordDisplay: React.FC<ChordDisplayProps> = ({ selectedNotes }) => {
     );
 };
 
-export default ChordDisplay; 
+export default ChordDisplay;

@@ -31,9 +31,9 @@ Implementing a custom BPM is simple as we can divide 60,000 by a user input BPM 
 The most common time signature is 4/4 meaning there are 4 beats in a bar. This is important as a metronome has 2 click sounds, one marking the beat and one marking the bar. So with 4/4 we would have one bar click and three beat clicks (making 4 in total). However, alternative time signatures include things such as 6/8 in which rather than just 6 beats within 8 bars, it means there are triplet tpye patterns within the bar. T
 Thus, we can calculate rhythms with 8ths like this:
 
-if (ts.value === 8) {
-return (60000 / bpm) * (3 / (ts.beats / 2));
-}
+    if (ts.value === 8) {
+    return (60000 / bpm) * (3 / (ts.beats / 2));
+    }
 
 Once we had all the rules of how to calculate intervals between beats and when to play a bar click sound, the missing pieces were a user controlled UI and an appealing animation to represent the data.
 UseRef is a great React hook for time based intervals since we can store values that don't change during a re-render of the virtual DOM. In other words, we can store use defined intervals within useRefs and then update UI using animationframeRef to dynamically change UI but keep metronome loops playing.
@@ -45,8 +45,14 @@ I decided to use Moonwave99/Fretboard.js since it had a method to interact with 
 
 I followed fairly closesly the documentation which had a very simple method to create and a call a fretboard object ( = new Fretboard) and then there are built in methods for mouse events in which you can click frets, save the position of that fret and keep in the render. Since we had everything inside a functional component, the key was to have the render within useRefs so that we could keep the state of the renders even when other elements were re-rendering.
 
-The only really custom part I added was the ability to change the tunings of the guitar (this was straightforward since Fretboard.js took different tunings as a parameter for first note of each string). And also when creating a custom script (ChordDisplay.tsx) which used tonaljs/tonal for calculating the likely chord that was generated (the logic was done for me through this package so saved the need to hard code and store each chord rule to calculate outputs).
+The only really custom part I added was the ability to change the tunings of the guitar (this was straightforward since Fretboard.js took different tunings as a parameter for first note of each string). 
+I used Tonal.js which has a detect() method to detect all possible chords from given note inputs:
 
+    const detected = Chord.detect(notes);
+    return detected[0];
+With this we are able to return the first detected chord.
 
+## 4) Midi Drum Pattern Looper:
+This section I was most excited to endevour on but knew it was likely going to be the most challenging.
 
 

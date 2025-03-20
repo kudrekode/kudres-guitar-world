@@ -12,6 +12,7 @@
   "dependencies": {
     "@moonwave99/fretboard.js": "^0.2.13",
     "@tonaljs/chord": "^6.1.1",
+    "@tonaljs/chord-type": "^5.1.1",
     "@tonaljs/scale": "^4.13.2",
     "@tonaljs/tonal": "^4.10.0",
     "pitchy": "^4.1.0",
