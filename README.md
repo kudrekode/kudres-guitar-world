@@ -53,6 +53,17 @@ I used Tonal.js which has a detect() method to detect all possible chords from g
 With this we are able to return the first detected chord.
 
 ## 4) Midi Drum Pattern Looper:
-This section I was most excited to endevour on but knew it was likely going to be the most challenging.
+This section I was most excited to endevour on but knew it was likely going to be the most challenging. My goal was to create:
+- Sequencer (looper) that the user can start and stop playing the audio with
+- User controlled time signature and BPM (which would affect sequencer logic and length)
+- Drums that conform to the BPM and time sign 
+- Instruments that randomly play in user defined key (i.e., user can add or remove instruments like bass that play in the key they have chosen)
+
+I couldn't seem to find any packages that satified all my requirements so I decided to create an entirely custom solution.
+My file structure initially was:
+- MidiSequencer.tsx (the main UI controller)
+- Sequencer.ts (the looper logic)
+- DrumMachine.ts (the drum logic and sound handling)
+- Instruments.ts (the instrument logic and sound handling)
 
 

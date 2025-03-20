@@ -1,7 +1,10 @@
-import Tuner from "../components/tuner/PitchyTuner.tsx";
 import {useState} from "react";
+
+import Tuner from "../components/tuner/PitchyTuner.tsx";
 import Metronome from "../components/metronome/Metronome.tsx";
 import ChordAnalyser from "../components/chord-analyser/Chord-Analyser.tsx";
+import MidiSequencer from "../components/midi-sequencer/MidiSequencer.tsx";
+
 import "./MainPage.css";
 
 const MainPage:React.FC = () => {
@@ -50,6 +53,8 @@ const MainPage:React.FC = () => {
                 <p>The website has a guitar tuner with most tunings you can think of ready to go, a metronome to practice to, a beat maker to practice those harder tunes as well as some general guitar music theory!</p>
                 <p>Enjoy!</p>
             </div>
+
+            <MidiSequencer />
 
             <div className="tool-buttons">
                 {!isMetronomeOpen && <button onClick={toggleMetronome}>Open Metronome</button>}
