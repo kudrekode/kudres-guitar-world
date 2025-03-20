@@ -3,7 +3,7 @@
 //Play audio and loop with a start and stop button
 //Allow user to input BPM, time sig and key, and remove or add instruments.
 
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import * as Tone from "tone";
 import { Midi } from "@tonejs/midi";
 
@@ -27,6 +27,10 @@ const MidiSequencer:React.FC = () => {
     const handleTimeSignatureChange = (newTimeSignature: TimeSignature) => {
         setTimeSignature(newTimeSignature);
     };
+
+    //We initialise this variable to ensure that if we select new time signature it doesnt play at same time:
+    const currentSequence = useRef<Tone.Sequence | null>(null);
+
 
     //Some samples of mine using Tone.Player to point to correct destination (needed to load samples into Tone.js objects):
     const drumKit = {
@@ -58,10 +62,6 @@ const MidiSequencer:React.FC = () => {
         //Adding time signature into dependency ensures it will restart loop with time signature changes:
     }, [playLoop,timeSignature]);
 
-    //We initialise this variable to ensure that if we select new time signature it doesnt play at same time:
-    let currentSequence: Tone.Sequence | null = null;
-
-
     //We use async functions to ensure that all the modules have loaded and are waiting for other code:
     async function startDrumLoop() {
 
@@ -73,12 +73,18 @@ const MidiSequencer:React.FC = () => {
         }
 
         //This is where we reset the sequence to stop simultaneous playing:
-        if (currentSequence) {
-            currentSequence.stop();
-            currentSequence.dispose();
-            currentSequence = null;
-            console.log("🔄 Resetting previous sequence");
+        if (currentSequence.current) {
+            currentSequence.current.stop();
+            currentSequence.current.dispose();
+            currentSequence.current = null;
+            console.log("Previous sequence stopped and cleared.");
         }
+        //Stops and resets the Tone.Transport between loops:
+        Tone.Transport.stop();
+        Tone.Transport.cancel();
+        Tone.Transport.bpm.value = bpm;
+        Tone.Transport.timeSignature = [timeSignature.beats, timeSignature.value];
+
 
         //Import the BPM from BPM controls:
         Tone.Transport.bpm.value = bpm;
@@ -174,7 +180,7 @@ const MidiSequencer:React.FC = () => {
         }
 
         // We use Tone.Sequence() over Tone.Loop() as behaves more as Midi sequencer rather than fixed interval time based loop!:
-        currentSequence = new Tone.Sequence(
+        currentSequence.current = new Tone.Sequence(
             (time: number, step: number) => {
                 pattern.forEach(({ sound, beats }) => {
                     if (beats.includes(step)) {
@@ -187,19 +193,19 @@ const MidiSequencer:React.FC = () => {
         ).start(0);
 
         //Starts the actual loop:
-        Tone.Transport.stop();
-
         Tone.Transport.start();
-        console.log("🥁 Drum Loop Started!");
+        console.log("Drum Loop Started!");
     }
 
     function stopDrumLoop() {
         Tone.Transport.stop();
-        console.log("⏹️ Drum Loop Stopped!");
-        if (currentSequence) {
-            currentSequence.stop();
-            currentSequence.dispose();
-            currentSequence = null;
+        Tone.Transport.cancel();
+        console.log("Drum Loop Stopped!");
+
+        if (currentSequence.current) {
+            currentSequence.current.stop();
+            currentSequence.current.dispose();
+            currentSequence.current = null;
         }
     }
 
