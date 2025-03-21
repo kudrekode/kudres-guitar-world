@@ -7,6 +7,7 @@ import BPMControlSequencer from "./BPMControlSequencer.tsx";
 import TimeSignatureControlSequencer, {commonTimeSignatures, TimeSignature} from "./TimeSignatureControlSequencer.tsx";
 
 import './MidiSequencer.css';
+import {start} from "tone";
 
 interface MidiSequencerProps {
     onClose?: () => void;
@@ -60,6 +61,7 @@ const MidiSequencer:React.FC<MidiSequencerProps> = ({onClose}) => {
         }
         //Adding time signature into dependency ensures it will restart loop with time signature changes:
     }, [playLoop,timeSignature]);
+
 
     //We use async functions to ensure that all the modules have loaded and are waiting for other code:
     async function startDrumLoop() {
@@ -120,10 +122,10 @@ const MidiSequencer:React.FC<MidiSequencerProps> = ({onClose}) => {
                 //Playing new time signs doesn't reset!
             case "3/4":
                 pattern = [
-                    { sound: drumKit.kick, beats: [0,3,6,9] },
-                    { sound: drumKit.snare, beats: [2, 5, 8, 11] },
-                    { sound: drumKit.hihat, beats: [0,1,2 ,3,4,5 ,6,7,8 ,9,10,11] },
-                    // { sound: drumKit.hihatO, beats: [7 ] },
+                    { sound: drumKit.kick, beats: [0,6] },
+                    { sound: drumKit.snare, beats: [2, 4, 7, 10] },
+                    { sound: drumKit.hihat, beats: [0,1,2 ,3,4 ,5,7,8 ,9,10,11] },
+                    { sound: drumKit.hihatO, beats: [6 ] },
                     { sound: drumKit.crash, beats: [0] },
                 ];
                 QuarterNotes = "8n";
@@ -132,14 +134,20 @@ const MidiSequencer:React.FC<MidiSequencerProps> = ({onClose}) => {
 
             case "6/8":
                 pattern = [
-                    { sound: drumKit.kick, beats: [0,6,12] },
-                    { sound: drumKit.snare, beats: [ 4, 10] },
-                    { sound: drumKit.hihat, beats: [0,1,2, 3,4, 6,7,8, 9,10 ,11,12,13,14,15,16,17] },
+                    { sound: drumKit.kick, beats: [0,6,12,18] },
+                    { sound: drumKit.snare, beats: [ 2, 4, 7, 10, 14,16,19,23] },
+                    { sound: drumKit.hihat, beats: [0,1,2, 3,4,5,
+                                                        6,7,8, 9,10,11
+                                                        ,12,13,14, 15,16,17
+                                                        ,18,19,21, 22,23,24] },
                     { sound: drumKit.hihatO, beats: [5,11] },
                     { sound: drumKit.crash, beats: [0] },
                 ];
                 QuarterNotes = "8n";
-                TotalBeats = [0,1,2, 3,4,5, 6,7,8, 9,10,11 ,12,13,14,15, 15,16,17];
+                TotalBeats = [0,1,2, 3,4,5,
+                                6,7,8, 9,10,11
+                                ,12,13,14, 15,16,17
+                                    ,18,19,21, 22,23,24];
                 break;
 
             case "9/8":

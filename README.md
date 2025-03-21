@@ -9,6 +9,8 @@ I started by outlining the initial objectives I wanted to achieve:
 4. Guitar chord calculator
 5. Midi drum creator to practice to with spectrum analyser for cool design purposes
 6. Guitar chords and tablature theory
+7. Design implementation
+8. Deploying and SEO
 
 ## Methodology:
 
@@ -59,11 +61,9 @@ This section I was most excited to endevour on but knew it was likely going to b
 - Drums that conform to the BPM and time sign 
 - Instruments that randomly play in user defined key (i.e., user can add or remove instruments like bass that play in the key they have chosen)
 
-I couldn't seem to find any packages that satified all my requirements so I decided to create an entirely custom solution.
-My file structure initially was:
-- MidiSequencer.tsx (the main UI controller)
-- Sequencer.ts (the looper logic)
-- DrumMachine.ts (the drum logic and sound handling)
-- Instruments.ts (the instrument logic and sound handling)
+I decided to use Tone.js and their sequencer methods. Scribble seemed to be an alternative for Midi file creation with great methods for time signature rules and patterns however, this would have to be used in conjunction with something like Tone.js in order to use an Audio Context in the web view (rather than a DAW solely). 
 
+The Tone.js sequencer method is easy to set up. Using Tone.Transport() you can start and stop sequences that loop automatically. You can specify the number of quarter notes and how many beats a sequence lasts. This was ideal as I imported the time signature controls and BPM controls from the Metronome, refactored slightly and then used these controls with a typescript switch() loop to process the intervals of what samples are played on what beats. This allowed for custom time signatures. 
+
+Realising that incorporating real time key instruments to accompany these drum patterns was an insanely complex job, I decided to leave this for a future patch and instead focus on the next features to get the product ready for deployment.
 
