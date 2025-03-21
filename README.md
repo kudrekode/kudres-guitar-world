@@ -1,3 +1,5 @@
+ONGOING PROJECT NOT YET DEPLOYED OR BY ANY MEANS FINISHED -- PUBLIC FOR PORTFOLIO
+
 # Kudre's Guitar World
 
 This is a personal project that was developed to improve my react/typescript skills as well as provide a platform for guitar players to have all the essential tools to practice and learn guitar.
